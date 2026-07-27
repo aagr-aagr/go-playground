@@ -2,18 +2,17 @@ package twosum
 
 func twoSum(nums []int, target int) []int {
 
-	//use map[int]int instead:w http.ResponseWriter, r *http.Request
+	seenNumber := make(map[int]int)
 	result := make([]int, 2, 2)
 
 	for x, y := range nums {
-		target = target - y
-		if target == 0 {
+		_, ok := seenNumber[target-y]
+		if ok {
 			result[1] = x
-			break
-		} else {
-			result[0] = x
-			continue
+			result[0] = seenNumber[target-y]
 		}
+		seenNumber[y] = x
 	}
+
 	return result
 }
